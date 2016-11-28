@@ -1,4 +1,6 @@
-# Laravel PHP Framework
+# Sistem Informasi Kecelakaan Lalu Lintas Indonesia
+
+project ini dibuat untuk memenuhi tugas mata kuliah manajemen sistem informasi tahun ajaran 2016/2017. Feel free to fork, ATM (Amati, Tiru, Modifikasi) Silahkan Amati, Tiru, dan Modifikasi sebanyak banyaknya! agar tidak terjadi plagiarism. 
 
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
