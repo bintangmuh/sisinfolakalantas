@@ -16,13 +16,13 @@ class CreateKejadianTable extends Migration
         Schema::create('kejadian', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->boolean('verif'); 
-            $table->integer('verifikator_id'); //verifikator polri
             $table->integer('sender_id'); //pengirim berita
-            $table->datetime('waktu_kejadian');
+            $table->dateTime('waktu_kejadian');
 
             $table->decimal('longitude', 10, 7);
             $table->decimal('latitude', 10, 7);
+
+            $table->integer('kabupaten_id');
 
             $table->timestamps();
         });

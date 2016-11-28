@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateKendaraanTable extends Migration
+class CreateSaksiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,14 @@ class CreateKendaraanTable extends Migration
      */
     public function up()
     {
-        Schema::create('kendaraan', function (Blueprint $table) {
+        Schema::create('saksi', function (Blueprint $table) {
             $table->increments('id');
 
-            $table->string('merk');
-            $table->string('warna');
-            $table->string('platnomor', 10);
-            $table->enum('tipe_kendaraan', ['Sepeda Motor', 'Mobil','Bus', 'Truk Sedang', 'Truk Berat', 'Lainnya']);
-            $table->integer('pengemudi_id');
+            $table->integer('kejadian_id');
+            $table->string('name');
+            $table->integer('umur');
+            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->string('nomor_id');
 
             $table->timestamps();
         });
@@ -33,6 +33,6 @@ class CreateKendaraanTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('kendaraan');
+        Schema::dropIfExists('saksi');
     }
 }

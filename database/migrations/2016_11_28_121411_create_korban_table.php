@@ -15,6 +15,14 @@ class CreateKorbanTable extends Migration
     {
         Schema::create('korban', function (Blueprint $table) {
             $table->increments('id');
+
+            $table->string('nama');
+            $table->integer('umur');
+            $table->enum('jenis_kelamin', ['L', 'P']);
+            $table->string('nomorid'); //identitas
+            $table->string('kondisi'); //kondisi korban, meninggal, luka parah, luka ringan, selamat tanpa luka
+            $table->integer('kabupaten_id');
+
             $table->timestamps();
         });
     }
