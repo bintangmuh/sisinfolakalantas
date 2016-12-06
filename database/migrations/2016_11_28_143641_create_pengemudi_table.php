@@ -20,7 +20,7 @@ class CreatePengemudiTable extends Migration
             $table->integer('umur');
             $table->enum('jenis_kelamin', ['L', 'P']);
             $table->string('nomor_id');
-            
+
             $table->timestamps();
         });
     }

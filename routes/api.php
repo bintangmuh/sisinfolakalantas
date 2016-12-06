@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
-
+use App\Kejadian as Kejadian;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,3 +16,8 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+Route::get('/kejadian', function() {
+  $kejadian = Kejadian::with('kendaraan','kendaraan.pengemudi', 'kendaraan.korban')->get();
+  return $kejadian;
+});

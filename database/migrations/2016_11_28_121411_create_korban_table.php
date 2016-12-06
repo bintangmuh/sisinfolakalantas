@@ -22,6 +22,7 @@ class CreateKorbanTable extends Migration
             $table->string('nomorid'); //identitas
             $table->string('kondisi'); //kondisi korban, meninggal, luka parah, luka ringan, selamat tanpa luka
             $table->integer('kabupaten_id');
+            $table->integer('kendaraan_id');
 
             $table->timestamps();
         });

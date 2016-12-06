@@ -17,4 +17,25 @@ Route::get('/', function () {
 
 Auth::routes();
 
+
+
 Route::get('/home', 'HomeController@index');
+
+Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'administrator'], function () {
+
+  Route::get('/', function () {
+    return redirect('administrator/dashboard');
+  });
+
+  Route::get('dashboard', function() {
+    return View::make('admin.index');
+  });
+
+  Route::get('datakorban', function() {
+    return View::make('admin.datakorban');
+  });
+
+  Route::get('peta', function() {
+    return View::make('admin.map');
+  });
+});

@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'Laravel',
+    'name' => 'Sistem Informasi Kecelakaan Lalu Lintas',
 
     /*
     |--------------------------------------------------------------------------
@@ -166,7 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+        JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         //
 
         /*
