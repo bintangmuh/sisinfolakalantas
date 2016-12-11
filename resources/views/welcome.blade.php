@@ -66,7 +66,7 @@
     </head>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+            @if (!(Auth::check()))
                 <div class="top-right links">
                     <a href="{{ url('/login') }}">Login</a>
                     <a href="{{ url('/register') }}">Register</a>
@@ -79,7 +79,13 @@
                 </div>
 
                 <div class="links">
-                    Informasi Kecelakaan Lalu Lintas
+                  @if ((Auth::check()))
+                    @if (Auth::user()->role == 'admin')
+                      <a href="/administrator">Administrator Dashboard</a> |
+                    @endif
+                  @endif
+                  <a href="/home">Lihat Peta</a> |
+                  <a href="#">Input Kecelekaan Baru</a>
                 </div>
             </div>
         </div>

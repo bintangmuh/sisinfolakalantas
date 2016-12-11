@@ -10,16 +10,26 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use Faker\Factory as Faker;
+
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/faker', function(){
+  $faker = Faker::create();
+  $faker->addProvider(new \Faker\Provider\id_ID\Person($faker));
+  $faker->addProvider(new \Faker\Provider\id_ID\Address($faker));
+  for ($i=0; $i < 100; $i++) {
+      echo $faker->name;
+  }
+});
 Auth::routes();
 
-
-
 Route::get('/home', 'HomeController@index');
+
+Route::get('/homebeta', 'UserController@beranda');
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'administrator'], function () {
 
@@ -27,9 +37,7 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'administrator'], f
     return redirect('administrator/dashboard');
   });
 
-  Route::get('dashboard', function() {
-    return View::make('admin.index');
-  });
+  Route::get('dashboard', 'AdminController@showIndex');
 
   Route::get('datakorban', function() {
     return View::make('admin.datakorban');
