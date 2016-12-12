@@ -27,9 +27,18 @@ Route::get('/faker', function(){
 });
 Auth::routes();
 
-Route::get('/home', 'HomeController@index');
+Route::group(['middleware' => 'auth'], function() {
+  Route::get('/home', 'UserController@beranda');
 
-Route::get('/homebeta', 'UserController@beranda');
+  Route::get('/kompkendaraan', function() {
+    return view('components.addkendaraan');
+  });
+
+  Route::get('/detail/{id}', 'KejadianController@show')->name('detailkejadian');
+
+  Route::post('/addkejadian', 'UserController@addKejadian');
+});
+
 
 Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'administrator'], function () {
 

@@ -75,7 +75,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    SisInfoLakaLantas
+                    <img class="img-responsive" src="/img/sisinfo-welcome.png" alt="">
                 </div>
 
                 <div class="links">

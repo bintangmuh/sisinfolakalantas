@@ -1,0 +1,21 @@
+#map {
+  padding: 0px;
+  height: calc(100vh - 64px);
+}
+#map-thumbnail {
+  padding: 0px;
+  height: 500px;
+}
+.forminput {
+  height: calc(100vh - 64px);
+  overflow-y: auto;
+  margin-bottom: 0px;
+  padding-bottom: 20px !important;
+  background-color: #fcfcfc;
+}
+.boat {
+  margin-bottom: 0px;
+}
+nav {
+  z-index: 9999;
+}
