@@ -36,7 +36,7 @@
               <td>{{ $kecelakaan->longitude }}</td>
               <td>{{ $kecelakaan->kabupaten->nama }}</td>
               <td>{{ $kecelakaan->kendaraan->count() }}</td>
-              <td>{{ $kecelakaan->kendaraan->count() }}</td>
+              <td>{{ $kecelakaan->korban->count() }}</td>
               <td>
                 <div class="btn-group">
                   <a href="{{ route('showDetilLakalantas', ['id' => $kecelakaan->id ])}}" class="btn bg-green"><i class="fa fa-eye"></i></a>

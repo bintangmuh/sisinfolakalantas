@@ -80,7 +80,23 @@
               </tr>
             </thead>
             <tbody>
-
+              @foreach ($kejadian->korban as $korban)
+                <tr>
+                  <td></td>
+                  <td>{{ $korban->nama }}</td>
+                  <td>{{ $korban->jenis_kelamin }}</td>
+                  <td>{{ $korban->umur }} tahun</td>
+                  <td>{{ $korban->kondisi }}</td>
+                  @if ($korban->kendaraan_id != 0)
+                    <td>{{ $korban->kendaraan->merk . " (". $korban->kendaraan->platnomor .")" }}</td>
+                  @else
+                    <td>Tidak Berkendara</td>
+                  @endif
+                  <td>
+                    <a href="#" class="btn btn-danger"><i class="fa fa-remove"></i></a>
+                  </td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -92,7 +108,7 @@
     <div class="col-sm-12">
       <div class="box box-warning">
         <div class="box-header wih border">
-          <h3 class="box-title">Tambah Korban</h3>
+          <h3 class="box-title"><i class="fa fa-plus"></i> Tambah Korban</h3>
         </div>
         <div class="box-body">
           <table class="table">
@@ -115,22 +131,31 @@
               <td>
               </td>
             </tr>
-            <form class="" action="index.html" method="post">
+            <form class="" action="{{ route('postkorban', ['id' => $kejadian->id]) }}" method="post">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
               <tr>
                 <td>
-                  <input type="text" name="nama" value="">
+                  <input class="form-control" type="text" name="nama" value="">
                 </td>
                 <td>
-                  <input type="text" name="Jenis kelamin" value="">
+                  <select class="form-control" name="jenis_kelamin">
+                    <option value="L">Laki-laki</option>
+                    <option value="P">Perempuan</option>
+                  </select>
                 </td>
                 <td>
-                  <input type="number" name="umur" value="">
+                  <input class="form-control" type="number" name="umur" value="">
                 </td>
                 <td>
-                  <input type="text" name="umur" value="">
+                  <input class="form-control" type="text" name="kondisi" value="">
                 </td>
                 <td>
-                  <input type="text" name="umur" value="">
+                  <select class="form-control" name="kendaraan">
+                    <option value="0">Tidak Berkendaraan</option>
+                    @foreach ($kejadian->kendaraan as $kendaraan)
+                      <option value="{{ $kendaraan->id }}">{{ $kendaraan->merk }} - {{ $kendaraan->platnomor }}</option>
+                    @endforeach
+                  </select>
                 </td>
                 <td>
                   <button type="submit" class="btn btn-primary" name="button" value="">Submit</button>

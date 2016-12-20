@@ -32,8 +32,18 @@ class AdminController extends Controller
       $kejadian = Kejadian::findOrFail($id);
       return view('admin.detailkecelakaan', ['kejadian' => $kejadian]);
     }
-    public function postKorban(Request $request)
+    public function postKorban($id)
     {
+      $korban = new Korban();
+
+      $korban->nama = Input::get('nama');
+      $korban->jenis_kelamin = Input::get('jenis_kelamin');
+      $korban->umur = Input::get('umur');
+      $korban->kondisi = Input::get('kondisi');
+      $korban->kendaraan_id = Input::get('kendaraan');
+      $korban->kejadian_id = $id;
+      $korban->save();
+      return redirect()->route('showDetilLakalantas', ['id' => $id]);
 
     }
 }

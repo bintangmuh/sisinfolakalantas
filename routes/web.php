@@ -55,7 +55,10 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'administrator'], f
   });
 
   Route::get('datakecelakaan', 'AdminController@showLakalantas')->name('showLakalantas');
+
   Route::get('datakecelakaan/{id}', 'AdminController@showDetilLakalantas')->name('showDetilLakalantas');
+
+  Route::post('datakecelakaan/{id}/postkorban', 'AdminController@postKorban')->name('postkorban');
 
   Route::get('peta', 'AdminController@showSebaran')->name('admin.sebaran');
 });

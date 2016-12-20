@@ -23,4 +23,9 @@ class Kejadian extends Model
     {
       return $this->hasOne('App\Kabupaten','id', 'kabupaten_id');
     }
+
+    public function korban()
+    {
+      return $this->hasMany('App\Korban','kejadian_id', 'id');
+    }
 }

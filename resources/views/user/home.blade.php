@@ -12,8 +12,8 @@
       <div class="forminput col s12 m4 card">
         <div class="row ">
           <ul class="tabs text-white">
-            <li class="tab col s6"><a class="waves-effect waves-light" href="#caribox">Riwayat Kecelakaan</a></li>
-            <li class="tab col s6"><a class="active waves-effect waves-light" href="#inputbox">Input Baru</a></li>
+            <li class="tab col s6"><a class="active waves-effect waves-light" href="#caribox">Riwayat Kecelakaan</a></li>
+            <li class="tab col s6"><a class="waves-effect waves-light" href="#inputbox">Input Baru</a></li>
           </ul>
         </div>
 
