@@ -19,10 +19,11 @@
 
         {{-- Div Pencarian --}}
         <div id="caribox">
-          <form class="" action="index.html" method="post">
+          <form class="" action="/search" method="post">
+            {{ csrf_field() }}
             <div class="row">
               <div class="input-field col s8">
-                  <input type="date" class="datepicker" value="{{ Carbon\Carbon::now()->format('d F, Y') }}">
+                  <input type="date" class="datepicker" name="date" value="{{ Carbon\Carbon::now()->format('d F, Y') }}">
               </div>
               <div class="input-field col s4">
                 <button type="submit" class="waves-effect waves-light btn red" name="button">Cari</button>
@@ -166,27 +167,27 @@
     });
 
     $(document).ready(function() {
-      $.ajax({
-          type: 'GET',
-          url: '//localhost:8000/api/kejadian',
-          data: { get_param: 'value' },
-          success: function (data) {
-              for (var i = 0; i < data.length; i++) {
-                map.addMarker({
-                  lat: data[i].latitude,
-                  lng: data[i].longitude,
-                  title: data[i],
-                  infoWindow: {
-                    content: "<p>"+data[i].waktu_kejadian+"</p>"
-                  },
-                  icon : {
-                    url : "{{ asset('/img/kecelakaan.png')}}"
-                  }
-                });
-                $('#cand').html(data);
-              }
-          }
-      });
+      // $.ajax({
+      //     type: 'GET',
+      //     url: '//localhost:8000/api/kejadian',
+      //     data: { get_param: 'value' },
+      //     success: function (data) {
+      //         for (var i = 0; i < data.length; i++) {
+      //           map.addMarker({
+      //             lat: data[i].latitude,
+      //             lng: data[i].longitude,
+      //             title: data[i],
+      //             infoWindow: {
+      //               content: "<p>"+data[i].waktu_kejadian+"</p>"
+      //             },
+      //             icon : {
+      //               url : "{{ asset('/img/kecelakaan.png')}}"
+      //             }
+      //           });
+      //           $('#cand').html(data);
+      //         }
+      //     }
+      // });
 
 
     });
@@ -205,4 +206,20 @@
     })
 
   </script>
+
+  @foreach ($kejadian as $kejadiantunggal)
+    <script type="text/javascript">
+    map.addMarker({
+      lat: {{$kejadiantunggal->latitude}},
+      lng: {{$kejadiantunggal->longitude}},
+      title: "Kecelakaan",
+      infoWindow: {
+        content: "Kecelakaan di: {{$kejadiantunggal->kabupaten->nama}} <br> <a href='/detail/{{$kejadiantunggal->id}}'>Detail</p>"
+      },
+      icon : {
+        url : "{{ asset('/img/kecelakaan.png')}}"
+      }
+    });
+    </script>
+  @endforeach
 @endsection

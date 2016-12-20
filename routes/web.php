@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function() {
   Route::get('/detail/{id}', 'KejadianController@show')->name('detailkejadian');
 
   Route::post('/addkejadian', 'UserController@addKejadian');
+
+  Route::post('/search', 'UserController@search');
 });
 
 
@@ -52,7 +54,8 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'administrator'], f
     return View::make('admin.datakorban');
   });
 
-  Route::get('peta', function() {
-    return View::make('admin.map');
-  });
+  Route::get('datakecelakaan', 'AdminController@showLakalantas')->name('showLakalantas');
+  Route::get('datakecelakaan/{id}', 'AdminController@showDetilLakalantas')->name('showDetilLakalantas');
+
+  Route::get('peta', 'AdminController@showSebaran')->name('admin.sebaran');
 });

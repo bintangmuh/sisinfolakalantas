@@ -15,7 +15,9 @@ use App\Kendaraan as Kendaraan;
 class UserController extends Controller
 {
     public function beranda(){
-      $kejadian = Kejadian::all();
+      $kejadian = Kejadian::where('waktu_kejadian','>',Carbon::today())
+                  ->where('waktu_kejadian','<',Carbon::today()->addDay())
+                  ->get();
       return view('user.home', array('kejadian' => $kejadian));
     }
 
@@ -41,4 +43,12 @@ class UserController extends Controller
 
       // return Input::all();
     }
+
+    public function search() {
+      $kejadian = Kejadian::where('waktu_kejadian','>',Carbon::parse(Input::get('date'))->format('Y-m-d'))
+                  ->where('waktu_kejadian','<',Carbon::parse(Input::get('date'))->addDay()->format('Y-m-d'))
+                  ->get();
+      return view('user.home', array('kejadian' => $kejadian));
+    }
+
 }

@@ -56,7 +56,7 @@
   <script src="/js/gmaps.js"></script>
   <script>
     var map = new GMaps({
-      el: '#map-thumbnail',
+      el: "#map-thumbnail",
       lat: {{$kejadian->latitude}},
       lng: {{$kejadian->longitude}},
       zoom: 18

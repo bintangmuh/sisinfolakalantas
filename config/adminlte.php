@@ -130,7 +130,7 @@ return [
             'submenu'     => [
                 [
                     'text' => 'Lihat Data',
-                    'url'  => '#',
+                    'route' => 'showLakalantas'
                 ],
                 [
                     'text' => 'Tambah Data Kecelakaan',
