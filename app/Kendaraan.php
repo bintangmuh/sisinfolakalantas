@@ -17,4 +17,9 @@ class Kendaraan extends Model
     {
         return $this->hasOne('App\Korban', 'kendaraan_id', 'id');
     }
+
+    public function kejadian()
+    {
+        return $this->belongsTo('App\Kejadian');
+    }
 }

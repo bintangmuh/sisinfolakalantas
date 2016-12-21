@@ -11,4 +11,7 @@ class Korban extends Model
     public function kendaraan() {
       return $this->belongsTo('App\Kendaraan');
     }
+    public function kejadian() {
+      return $this->belongsTo('App\Kejadian');
+    }
 }

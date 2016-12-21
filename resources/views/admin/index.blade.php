@@ -13,15 +13,14 @@
 @section('content')
   <div class="row">
     <div class="col-sm-12">
-      <h4>Hari ini..</h4>
       <div class="row">
         <div class="col-sm-4">
           <div class="info-box">
             <span class="info-box-icon bg-red"><i class="fa fa-car"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-number">90 Kejadian</span>
-              <span class="info-box-text">Kecelakaan Kendaraan</span>
+              <span class="info-box-number">{{$kejadian->count()}} Kejadian</span>
+              <span class="info-box-text">Kecelakaan Lalu Lintas Tersimpan</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -32,7 +31,7 @@
             <span class="info-box-icon bg-orange"><i class="fa fa-child"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-number">100</span>
+              <span class="info-box-number">{{$korban->count()}}</span>
               <span class="info-box-text">Korban</span>
             </div>
             <!-- /.info-box-content -->
@@ -75,6 +74,7 @@
       </div>
     </div>
   </div>
+
 @stop
 
 
@@ -86,10 +86,10 @@
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ["Sleman", "Bantul", "Kota Madya", "Kulon Progo", "Gunungkidul"],
+                labels: ["Sleman", "Kota", "Bantul", "Kulon Progo", "Gunungkidul"],
                 datasets: [{
-                    label: '# of Votes',
-                    data: [12, 19, 3, 5, 2],
+                    label: 'Angka Kecelakaan',
+                    data: {{ json_encode($angka) }},
                     backgroundColor: [
                         '#DDDDDD',
                         'rgba(54, 162, 235, 1)',

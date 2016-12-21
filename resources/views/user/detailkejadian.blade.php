@@ -44,6 +44,42 @@
       <div class="row">
         <div class="col s12">
           <h5>Daftar Korban</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>No.</th>
+                <th>Nama</th>
+                <th>Jenis Kelamin</th>
+                <th>Umur</th>
+                <th>Kondisi</th>
+                <th>Kendaraan</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              @php
+                $i = 1;
+              @endphp
+              @foreach ($kejadian->korban as $korban)
+                <tr>
+                  <td>{{ $i++ }}</td>
+                  <td>{{ $korban->nama }}</td>
+                  <td>{{ $korban->jenis_kelamin }}</td>
+                  <td>{{ $korban->umur }} tahun</td>
+                  <td>{{ $korban->kondisi }}</td>
+                  @if ($korban->kendaraan_id != 0)
+                    <td>{{ $korban->kendaraan->merk . " (". $korban->kendaraan->platnomor .")" }}</td>
+                  @else
+                    <td>Tidak Berkendara</td>
+                  @endif
+                  <td>
+                    <a href="#" class="btn btn-danger"><i class="fa fa-remove"></i></a>
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+
         </div>
       </div>
     </div>

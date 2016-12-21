@@ -2,15 +2,6 @@
 
 @section('title', 'Dashboard')
 
-@php
-use Faker\Factory as Faker;
-$faker = Faker::create();
-$faker->addProvider(new \Faker\Provider\id_ID\Person($faker));
-$faker->addProvider(new \Faker\Provider\id_ID\Address($faker));
-$faker->addProvider(new \Faker\Provider\Base($faker));
-
-@endphp
-
 
 @section('content_header')
     <h1>Data Korban kecelakaan</h1>
@@ -33,25 +24,28 @@ $faker->addProvider(new \Faker\Provider\Base($faker));
             <th>Nama</th>
             <th>Jenis Kelamin</th>
             <th>Umur</th>
-            <th>Asal</th>
             <th>Kondisi</th>
             <th>Kendaraan</th>
             <th>Tanggal Kecelakaan</th>
           </tr>
         </thead>
         <tbody>
-          @for ($i=1; $i < 100; $i++)
+          @foreach ($korban as $korbannya)
             <tr>
-              <td>{{ $i }}</td>
-              <td>{{ $faker->name }}</td>
-              <td>Pria</td>
-              <td>22</td>
-              <td>{{ $faker->address }}</td>
-              <td>Luka Ringan</td>
-              <td>Motor</td>
-              <td>7 Desember 2016</td>
+              <td>{{ $korbannya->id }}</td>
+              <td>{{ $korbannya->nama }}</td>
+              <td>{{ $korbannya->jenis_kelamin }}</td>
+              <td>{{ $korbannya->umur }} tahun</td>
+              <td>{{ $korbannya->kondisi }}</td>
+              @if ($korbannya->kendaraan_id != 0)
+                <td>{{ $korbannya->kendaraan->tipe_kendaraan }}</td>
+              @else
+                <td>Tidak Berkendara</td>
+              @endif
+              <td>{{$korbannya->kejadian->waktu_kejadian}}</td>
             </tr>
-          @endfor
+          @endforeach
+
         </tbody>
       </table>
     </div>

@@ -20,7 +20,7 @@
         {{-- Div Pencarian --}}
         <div id="caribox">
           <form class="" action="/search" method="post">
-            {{ csrf_field() }}
+            <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="row">
               <div class="input-field col s8">
                   <input type="date" class="datepicker" name="date" value="{{ Carbon\Carbon::now()->format('d F, Y') }}">
@@ -214,7 +214,7 @@
       lng: {{$kejadiantunggal->longitude}},
       title: "Kecelakaan",
       infoWindow: {
-        content: "Kecelakaan di: {{$kejadiantunggal->kabupaten->nama}} <br> <a href='/detail/{{$kejadiantunggal->id}}'>Detail</p>"
+        content: "Kecelakaan di: {{$kejadiantunggal->kabupaten->nama}} <br> Korban: {{$kejadiantunggal->korban->count() }} <br> <a href='/detail/{{$kejadiantunggal->id}}'>Detail</p>"
       },
       icon : {
         url : "{{ asset('/img/kecelakaan.png')}}"

@@ -17,14 +17,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/faker', function(){
-  $faker = Faker::create();
-  $faker->addProvider(new \Faker\Provider\id_ID\Person($faker));
-  $faker->addProvider(new \Faker\Provider\id_ID\Address($faker));
-  for ($i=0; $i < 100; $i++) {
-      echo $faker->name;
-  }
-});
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function() {
@@ -50,15 +42,21 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'administrator'], f
 
   Route::get('dashboard', 'AdminController@showIndex');
 
-  Route::get('datakorban', function() {
-    return View::make('admin.datakorban');
-  });
+  Route::get('datakorban', 'AdminController@showAllKorban');
 
   Route::get('datakecelakaan', 'AdminController@showLakalantas')->name('showLakalantas');
 
   Route::get('datakecelakaan/{id}', 'AdminController@showDetilLakalantas')->name('showDetilLakalantas');
 
   Route::post('datakecelakaan/{id}/postkorban', 'AdminController@postKorban')->name('postkorban');
+
+  Route::post('tambahkendaraan/{id}/', 'AdminController@tambahKendaraan')->name('tambahkendaraan');
+
+  Route::post('editkorban/{id}/', 'AdminController@editKorban')->name('editkorban');
+
+  Route::get('hapuskorban/{id}/', 'AdminController@hapusKorban')->name('hapuskorban');
+
+  Route::post('editkendaraan/{id}/', 'AdminController@editKendaraan')->name('editkendaraan');
 
   Route::get('peta', 'AdminController@showSebaran')->name('admin.sebaran');
 });
