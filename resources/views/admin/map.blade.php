@@ -12,11 +12,61 @@
 
 @section('content')
   <div class="row">
-    <div id="map" style="height: 500px">
+    <div id="map" style="height: 500px; margin-bottom: 10px;">
 
     </div>
   </div>
   <div class="row">
+
+    <div class="col-sm-12">
+      <div class="box box-danger">
+        <div class="box-header">
+          <h3 class="box-title"><i class="fa fa-filter"></i> Filter</h3>
+          <div class="box-body">
+            <form class="" action="{{ route('filterurl') }}" method="post">
+              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+              
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="col-sm-12 label-control">Tahun</label>
+                    <select class="form-control" name="month">
+                      <option value="1">Januari</option>
+                      <option value="2">Februari</option>
+                      <option value="3">Maret</option>
+                      <option value="4">April</option>
+                      <option value="5">Mei</option>
+                      <option value="6">Juni</option>
+                      <option value="7">Juli</option>
+                      <option value="8">Agustus</option>
+                      <option value="9">September</option>
+                      <option value="10">Oktober</option>
+                      <option value="11">November</option>
+                      <option value="12">Desember</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label class="col-sm-12 label-control">Bulan</label>
+                    <select class="form-control" name="year">
+                      @for ($i=2016; $i < 2020; $i++)
+                        <option value="{{$i}}">{{$i}}</option>
+                      @endfor
+                    </select>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <label class="col-sm-12 label-control">&nbsp;</label>
+                  <button type="sumbit" class="btn btn-primary">Filter</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="col-sm-12">
       <div class="box box-danger">
         <div class="box-body">

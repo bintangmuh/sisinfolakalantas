@@ -60,6 +60,19 @@ class AdminController extends Controller
       return view('admin.map', ['kejadian' => $kejadian]);
     }
 
+    public function filter()
+    {
+      return redirect()->route('showsebaran', ['month' => Input::get('month'),'year' => Input::get('year')]);
+    }
+
+    public function filterSebaran($month, $year)
+    {
+      $kejadian = Kejadian::whereMonth('waktu_kejadian', '=', $month)
+                  ->whereYear('waktu_kejadian', '=', $year)
+                  ->get();
+      return view('admin.map', ['kejadian' => $kejadian]);
+    }
+
 
     public function showDetilLakalantas($id)
     {
@@ -82,6 +95,9 @@ class AdminController extends Controller
       return redirect()->route('showDetilLakalantas', ['id' => $kendaraan->kejadian_id]);
 
     }
+
+
+
     public function editKendaraan($id)
     {
         $kendaraan = Kendaraan::find($id);
