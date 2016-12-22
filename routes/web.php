@@ -22,6 +22,8 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/home', 'UserController@beranda');
 
+  Route::get('/laporan', 'UserController@listKejadian')->name('laporankejadian');
+
   Route::get('/kompkendaraan', function() {
     return view('components.addkendaraan');
   });
@@ -45,6 +47,12 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'administrator'], f
   Route::get('datakorban', 'AdminController@showAllKorban');
 
   Route::get('datakecelakaan', 'AdminController@showLakalantas')->name('showLakalantas');
+
+  Route::post('datakecelakaan/{id}/postkorban', 'AdminController@postKorban')->name('postkorban');
+
+  Route::post('filter', 'AdminController@filter')->name('filterurl');
+
+  Route::get('filter/{month}/{year}', 'AdminController@filterSebaran')->name('showsebaran');
 
   Route::get('datakecelakaan/{id}', 'AdminController@showDetilLakalantas')->name('showDetilLakalantas');
 

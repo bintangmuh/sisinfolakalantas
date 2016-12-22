@@ -21,6 +21,11 @@ class UserController extends Controller
       return view('user.home', array('kejadian' => $kejadian));
     }
 
+    public function listKejadian(){
+      $kejadian = Kejadian::where('sender_id', '=', Auth::user()->id)->orderBy('waktu_kejadian', 'DESC')->get();
+      return view('user.datakejadian', array('kejadian' => $kejadian));
+    }
+
     public function addKejadian() {
       $kejadian = new Kejadian();
       $kejadian->latitude = Input::get('latitude');
@@ -42,6 +47,7 @@ class UserController extends Controller
       }
 
       // return Input::all();
+      return redirect()->route('detailkejadian', ['id' => $kejadian->id]);
     }
 
     public function search() {

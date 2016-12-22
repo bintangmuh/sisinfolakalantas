@@ -120,23 +120,14 @@ return [
             'icon'        => 'map'
         ],
         [
-            'text'        => 'Statistik Korban Kecelakaan',
+            'text'        => 'Data Korban',
             'url'         => 'administrator/datakorban',
             'icon'        => 'child'
         ],
         [
             'text'        => 'Data Kecelakaan',
             'icon'        => 'file',
-            'submenu'     => [
-                [
-                    'text' => 'Lihat Data',
-                    'route' => 'showLakalantas'
-                ],
-                [
-                    'text' => 'Tambah Data Kecelakaan',
-                    'url'  => '#',
-                ],
-              ]
+            'route'       => 'showLakalantas'
         ],
         'ADMINISTRATOR',
         [
@@ -159,44 +150,7 @@ return [
               ]
             ]
         ],
-        [
-            'text'    => 'Multilevel',
-            'icon'    => 'share',
-            'submenu' => [
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'Level One',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'Level Two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'Level Two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'Level One',
-                    'url'  => '#',
-                ],
-            ],
-        ],
+
     ],
 
     /*

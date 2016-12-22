@@ -26,4 +26,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function kejadian() {
+      return $this->hasMany('App\Kejadian','sender_id', 'id');
+    }
 }

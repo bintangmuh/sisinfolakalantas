@@ -72,9 +72,6 @@
                   @else
                     <td>Tidak Berkendara</td>
                   @endif
-                  <td>
-                    <a href="#" class="btn btn-danger"><i class="fa fa-remove"></i></a>
-                  </td>
                 </tr>
               @endforeach
             </tbody>

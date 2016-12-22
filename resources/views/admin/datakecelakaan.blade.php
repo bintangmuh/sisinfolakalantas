@@ -39,9 +39,7 @@
               <td>{{ $kecelakaan->korban->count() }}</td>
               <td>
                 <div class="btn-group">
-                  <a href="{{ route('showDetilLakalantas', ['id' => $kecelakaan->id ])}}" class="btn bg-green"><i class="fa fa-eye"></i></a>
-                  <a href="#" class="btn btn-primary"><i class="fa fa-pencil"></i></a>
-                  <button type="button" class="btn btn-danger"><i class="fa fa-remove"></i></button>
+                  <a href="{{ route('showDetilLakalantas', ['id' => $kecelakaan->id ])}}" class="btn bg-green"><i class="fa fa-pencil"></i></a>
                 </div>
               </td>
             </tr>
