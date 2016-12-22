@@ -32,7 +32,12 @@ class AdminController extends Controller
         $gunungkidul->kejadian->count(),
       );
 
-      return view('admin.index',['angka' => $angka, 'korban' => $korban, 'kejadian' => $kejadian]);
+      $angkakendaraan = DB::table('kendaraan')
+                     ->select(DB::raw('count(*) as jumlah, tipe_kendaraan'))
+                     ->groupBy('tipe_kendaraan')
+                     ->get();
+
+      return view('admin.index',['angka' => $angka, 'korban' => $korban, 'kejadian' => $kejadian, 'angkakendaraan' => $angkakendaraan]);
 
 
     }

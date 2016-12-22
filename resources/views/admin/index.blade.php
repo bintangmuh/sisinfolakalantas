@@ -43,8 +43,8 @@
             <span class="info-box-icon bg-aqua"><i class="ion ion-ios-gear-outline"></i></span>
 
             <div class="info-box-content">
-              <span class="info-box-text">CPU Traffic</span>
-              <span class="info-box-number">90<small>%</small></span>
+              <span class="info-box-number">{{ App\Kendaraan::all()->count() }}</span>
+              <span class="info-box-text">Kendaraan</span>
             </div>
             <!-- /.info-box-content -->
           </div>
@@ -66,10 +66,10 @@
     <div class="col-sm-6">
       <div class="box box-primary">
         <div class="box-header">
-          <h3 class="box-title">Statistik Jumlah Korban Kecelakaan</h3>
+          <h3 class="box-title">Statistik Jumlah Kendaraan yang Kecelakaan</h3>
         </div>
         <div class="box-body">
-
+          <canvas id="pieChart"></canvas>
         </div>
       </div>
     </div>
@@ -79,7 +79,6 @@
 
 
 @section('js')
-    <script> console.log('Hi!'); </script>
     <script src="{{ asset('js/Chart.bundle.min.js') }}" charset="utf-8"></script>
     <script>
         var ctx = document.getElementById("myChart");
@@ -107,6 +106,37 @@
                         }
                     }]
                 }
+            }
+        });
+
+        var piechart = document.getElementById("pieChart");
+        var myChart = new Chart(piechart, {
+            type: 'pie',
+            data: {
+                labels: [
+                  "{{ $angkakendaraan[0]->tipe_kendaraan }}",
+                  "{{ $angkakendaraan[1]->tipe_kendaraan }}",
+                  "{{ $angkakendaraan[2]->tipe_kendaraan }}",
+                  "{{ $angkakendaraan[3]->tipe_kendaraan }}",
+                  "{{ $angkakendaraan[4]->tipe_kendaraan }}",
+                ],
+                datasets: [{
+                    label: 'Angka Kecelakaan',
+                    data: [
+                      {{ $angkakendaraan[0]->jumlah }},
+                      {{ $angkakendaraan[1]->jumlah }},
+                      {{ $angkakendaraan[2]->jumlah }},
+                      {{ $angkakendaraan[3]->jumlah }},
+                      {{ $angkakendaraan[4]->jumlah }}
+                    ],
+                    backgroundColor: [
+                        '#F44336',
+                        '#3F51B5',
+                        '#039BE5',
+                        '#00838F',
+                        '#FF5722'
+                    ],
+                }]
             }
         });
     </script>
