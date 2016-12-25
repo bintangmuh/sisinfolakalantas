@@ -22,7 +22,10 @@
           <form class="" action="/search" method="post">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="row">
+
               <div class="input-field col s8">
+                <h5>Pencarian Kecelekaan</h5>
+                  <input type="date" class="datepicker" name="date" value="{{ Carbon\Carbon::now()->format('d F, Y') }}">
                   <input type="date" class="datepicker" name="date" value="{{ Carbon\Carbon::now()->format('d F, Y') }}">
               </div>
               <div class="input-field col s4">

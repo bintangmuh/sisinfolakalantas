@@ -22,7 +22,7 @@ class UserController extends Controller
     }
 
     public function listKejadian(){
-      $kejadian = Kejadian::where('sender_id', '=', Auth::user()->id)->orderBy('waktu_kejadian', 'DESC')->get();
+      $kejadian = Kejadian::where('sender_id', '=', Auth::user()->id)->orderBy('waktu_kejadian', 'DESC')->paginate(5);
       return view('user.datakejadian', array('kejadian' => $kejadian));
     }
 
@@ -54,7 +54,13 @@ class UserController extends Controller
       $kejadian = Kejadian::where('waktu_kejadian','>',Carbon::parse(Input::get('date'))->format('Y-m-d'))
                   ->where('waktu_kejadian','<',Carbon::parse(Input::get('date'))->addDay()->format('Y-m-d'))
                   ->get();
+      // return $kejadian;
       return view('user.home', array('kejadian' => $kejadian));
+    }
+
+    public function logout() {
+      Auth::logout();
+      return redirect('/');
     }
 
 }

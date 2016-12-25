@@ -12,12 +12,6 @@
 
 @section('content')
   <div class="row">
-    <div id="map" style="height: 500px; margin-bottom: 10px;">
-
-    </div>
-  </div>
-  <div class="row">
-
     <div class="col-sm-12">
       <div class="box box-danger">
         <div class="box-header">
@@ -25,7 +19,7 @@
           <div class="box-body">
             <form class="" action="{{ route('filterurl') }}" method="post">
               <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              
+
               <div class="row">
                 <div class="col-sm-4">
                   <div class="form-group">
@@ -66,6 +60,13 @@
         </div>
       </div>
     </div>
+  </div>
+  <div class="row">
+    <div id="map" style="height: 500px; margin-bottom: 10px;">
+
+    </div>
+  </div>
+  <div class="row">
 
     <div class="col-sm-12">
       <div class="box box-danger">

@@ -52,8 +52,38 @@
       </div>
     </div>
   </div>
+
   <div class="row">
-    <div class="col-sm-6">
+    <div class="col-sm-8">
+      <div class="box box-primary">
+        <div class="box-header">
+          <h3 class="box-title">Grafik Per Hari</h3>
+        </div>
+        <div class="box-body">
+          <canvas id="pertumbuhan" height="100px"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-4">
+      <div class="box box-danger">
+        <div class="box-header">
+          <h3 class="box-title">Kecelakaan Baru</h3>
+        </div>
+          <ul class="list-group">
+              @foreach ($laporanbaru as $laporan)
+                <a href="{{ route('showDetilLakalantas', ['id' => $laporan->id])}}" class="list-group-item">{{ $laporan->latitude }}, {{ $laporan->longitude }} ({{ $laporan->waktu_kejadian->format('d M Y H:i') }})</a>
+              @endforeach
+          </ul>
+          <div class="box-footer text-left">
+            <a href="{{route('showLakalantas')}}" class="btn btn-primary">Lihat semua</a>
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-8">
       <div class="box box-primary">
         <div class="box-header">
           <h3 class="box-title">Statistik Perbandingan Kecelakaan</h3>
@@ -63,7 +93,7 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
       <div class="box box-primary">
         <div class="box-header">
           <h3 class="box-title">Statistik Jumlah Kendaraan yang Kecelakaan</h3>
@@ -74,7 +104,6 @@
       </div>
     </div>
   </div>
-
 @stop
 
 
@@ -138,6 +167,56 @@
                     ],
                 }]
             }
+        });
+
+        var lineChart = document.getElementById("pertumbuhan");
+
+        var myLineChart = Chart.Line(lineChart, {
+            data: {
+              labels: [
+                @foreach ($pertumbuhan as $haripertumbuhan)
+                  "{{ Carbon\Carbon::parse($haripertumbuhan->date)->format('d M Y') }}",
+                @endforeach
+              ],
+              datasets: [
+                  {
+                      label: "Jumlah Lakalantas",
+                      fill: true,
+                      lineTension: 0.1,
+                      backgroundColor: "rgba(75,192,192,0.4)",
+                      borderColor: "rgba(75,192,192,1)",
+                      borderCapStyle: 'butt',
+                      borderDash: [],
+                      borderDashOffset: 0.0,
+                      borderJoinStyle: 'miter',
+                      pointBorderColor: "rgba(75,192,192,1)",
+                      pointBackgroundColor: "#fff",
+                      pointBorderWidth: 1,
+                      pointHoverRadius: 5,
+                      pointHoverBackgroundColor: "rgba(75,192,192,1)",
+                      pointHoverBorderColor: "rgba(220,220,220,1)",
+                      pointHoverBorderWidth: 2,
+                      pointRadius: 1,
+                      pointHitRadius: 10,
+                      data: [
+                        @foreach ($pertumbuhan as $haripertumbuhan)
+                          {{ $haripertumbuhan->jumlah }},
+                        @endforeach
+                      ],
+                      spanGaps: false,
+                  }
+              ]
+          },
+
+          options: {
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero:true
+                      }
+                  }]
+              }
+          }
         });
     </script>
 @stop

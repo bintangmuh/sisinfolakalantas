@@ -24,6 +24,8 @@ Route::group(['middleware' => 'auth'], function() {
 
   Route::get('/laporan', 'UserController@listKejadian')->name('laporankejadian');
 
+  Route::get('/logout', 'UserController@logout')->name('logout');
+
   Route::get('/kompkendaraan', function() {
     return view('components.addkendaraan');
   });

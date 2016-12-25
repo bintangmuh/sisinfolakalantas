@@ -40,10 +40,11 @@
             @endforeach
           </tbody>
         </table>
+        {{ $kejadian->links() }}
       </div>
   </div>
 @endsection
 
 @section('js')
-  
+
 @endsection

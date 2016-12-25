@@ -16,7 +16,7 @@
     <div class="col-sm-6">
       <div class="box">
         <div class="box-header">
-          <h3 class="box-title">Lokasi</h3>
+          <h3 class="box-title">Peta Kejadian</h3>
         </div>
         <div class="box-body">
           <div id="map-thumbnail" style="height: 350px;">
@@ -426,7 +426,7 @@ $(document).ready(function() {
     var element = ".col-sm-6 .box .box-body #map-thumbnail";
     $(element).html('<h4><i class="fa fa-exclamation-circle"></i> Error Loading Google Maps</h4>');
     var map = new GMaps({
-      el: '.box .box-body #map-thumbnail',
+      el: '#map-thumbnail',
       lat: {{$kejadian->latitude}},
       lng: {{$kejadian->longitude}},
       zoom: 18
@@ -440,5 +440,6 @@ $(document).ready(function() {
       }
     });
 
+    
   });
 </script>

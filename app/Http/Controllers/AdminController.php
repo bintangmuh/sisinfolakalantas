@@ -37,7 +37,12 @@ class AdminController extends Controller
                      ->groupBy('tipe_kendaraan')
                      ->get();
 
-      return view('admin.index',['angka' => $angka, 'korban' => $korban, 'kejadian' => $kejadian, 'angkakendaraan' => $angkakendaraan]);
+      $pertumbuhan = Kejadian::select(DB::raw('DATE(waktu_kejadian) as date, count(*) as jumlah'))
+                      ->groupBy('date')
+                      ->limit(7)
+                      ->get();
+      $laporanbaru = Kejadian::select('*')->orderBy('waktu_kejadian', 'DESC')->limit(5)->get();
+      return view('admin.index',['angka' => $angka, 'korban' => $korban, 'kejadian' => $kejadian, 'angkakendaraan' => $angkakendaraan, 'pertumbuhan' => $pertumbuhan, 'laporanbaru' => $laporanbaru]);
 
 
     }
@@ -51,7 +56,17 @@ class AdminController extends Controller
     public function showAllKorban()
     {
       $korban = Korban::all();
-      return view('admin.datakorban', ['korban' => $korban]);
+      $gender = Korban::select(DB::raw('count(*) as jumlah, jenis_kelamin'))
+                ->groupBy('jenis_kelamin')
+                ->get();
+      $umur = array(
+        'balita' => Korban::where('umur', '>=', 0)->where('umur', '<', 6)->count(),
+        'anak' => Korban::where('umur', '>=', 6)->where('umur', '<', 17)->count(),
+        'dewasa' => Korban::where('umur', '>=', 17)->where('umur', '<', 50)->count(),
+        'lansia' => Korban::where('umur', '>=', 50)->count()
+      );
+
+      return view('admin.datakorban', ['korban' => $korban, 'gender' => $gender, 'umur' => ($umur)]);
     }
 
     public function showSebaran()
