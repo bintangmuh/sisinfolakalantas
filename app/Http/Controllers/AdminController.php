@@ -38,8 +38,8 @@ class AdminController extends Controller
                      ->get();
 
       $pertumbuhan = Kejadian::select(DB::raw('DATE(waktu_kejadian) as date, count(*) as jumlah'))
+                      ->orderBy('waktu_kejadian', 'ASC')
                       ->groupBy('date')
-                      ->limit(7)
                       ->get();
       $laporanbaru = Kejadian::select('*')->orderBy('waktu_kejadian', 'DESC')->limit(5)->get();
       return view('admin.index',['angka' => $angka, 'korban' => $korban, 'kejadian' => $kejadian, 'angkakendaraan' => $angkakendaraan, 'pertumbuhan' => $pertumbuhan, 'laporanbaru' => $laporanbaru]);

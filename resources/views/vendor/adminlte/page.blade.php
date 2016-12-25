@@ -4,6 +4,7 @@
     <link rel="stylesheet"
           href="{{ asset('vendor/adminlte/dist/css/skins/skin-' . config('adminlte.skin', 'blue') . '.min.css')}} ">
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css')}}">
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.13/css/dataTables.bootstrap.min.css">
     @stack('css')
     @yield('css')
 @stop
@@ -134,6 +135,7 @@
 @section('adminlte_js')
   <script src="{{ asset('vendor/adminlte/dist/js/app.min.js') }}"></script>
   <script src="{{ asset('/js/sweetalert.min.js') }}"></script>
+  <script src="//cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js" charset="utf-8"></script>
     @stack('js')
     @yield('js')
 @stop

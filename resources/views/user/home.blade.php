@@ -23,10 +23,10 @@
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div class="row">
 
-              <div class="input-field col s8">
-                <h5>Pencarian Kecelekaan</h5>
-                  <input type="date" class="datepicker" name="date" value="{{ Carbon\Carbon::now()->format('d F, Y') }}">
-                  <input type="date" class="datepicker" name="date" value="{{ Carbon\Carbon::now()->format('d F, Y') }}">
+              <div class="input-field col s12">
+                <h5>Penyaringan Kecelekaan</h5>
+                  <b>Tanggal awal :</b> <input type="date" class="datepicker" name="date1" value="{{ isset($date)? $date[0]:Carbon\Carbon::now()->format('d F, Y') }}">
+                  <b>Tanggal akhir :</b> <input type="date" class="datepicker" name="date2" value="{{ isset($date)? $date[1]:Carbon\Carbon::now()->format('d F, Y') }}">
               </div>
               <div class="input-field col s4">
                 <button type="submit" class="waves-effect waves-light btn red" name="button">Cari</button>
@@ -128,6 +128,7 @@
     </div>
 
   </div>
+
 @endsection
 
 
@@ -138,7 +139,8 @@
   <script type="text/javascript">
     $('.datepicker').pickadate({
       selectMonths: true, // Creates a dropdown to control month
-      selectYears: 15 // Creates a dropdown of 15 years to control year
+      selectYears: 15, // Creates a dropdown of 15 years to control year
+      formatSubmit: 'yyyy-mm-dd'
     });
   </script>
   <script>
@@ -148,7 +150,8 @@
     var map = new GMaps({
       el: '#map',
       lat: -7.7710649,
-      lng: 110.3865498
+      lng: 110.3865498,
+      zoom: 11
     });
     map.addListener('click', function(event) {
       console.log(event.latLng);

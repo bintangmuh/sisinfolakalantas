@@ -23,7 +23,7 @@
               <div class="row">
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label class="col-sm-12 label-control">Tahun</label>
+                    <label class="col-sm-12 label-control">Bulan</label>
                     <select class="form-control" name="month">
                       <option value="1">Januari</option>
                       <option value="2">Februari</option>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-sm-4">
                   <div class="form-group">
-                    <label class="col-sm-12 label-control">Bulan</label>
+                    <label class="col-sm-12 label-control">Tahun</label>
                     <select class="form-control" name="year">
                       @for ($i=2016; $i < 2020; $i++)
                         <option value="{{$i}}">{{$i}}</option>
@@ -117,7 +117,8 @@
     var map = new GMaps({
       el: '#map',
       lat: -7.7710649,
-      lng: 110.3865498
+      lng: 110.3865498,
+      zoom: 11
     });
     </script>
 
@@ -132,4 +133,8 @@
       });
       </script>
     @endforeach
+
+    <script type="text/javascript">
+      $('#tabel-kejadian').DataTable();
+    </script>
 @endsection

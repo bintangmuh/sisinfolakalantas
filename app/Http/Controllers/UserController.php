@@ -51,11 +51,11 @@ class UserController extends Controller
     }
 
     public function search() {
-      $kejadian = Kejadian::where('waktu_kejadian','>',Carbon::parse(Input::get('date'))->format('Y-m-d'))
-                  ->where('waktu_kejadian','<',Carbon::parse(Input::get('date'))->addDay()->format('Y-m-d'))
+      $kejadian = Kejadian::where('waktu_kejadian','>',Input::get('date1_submit') .' 00:00:00')
+                  ->where('waktu_kejadian','<',Input::get('date2_submit') .' 23:59:59')
                   ->get();
-      // return $kejadian;
-      return view('user.home', array('kejadian' => $kejadian));
+      // return Input::all();
+      return view('user.home', array('kejadian' => $kejadian, 'date' => [Input::get('date1'), Input::get('date2')]));
     }
 
     public function logout() {
