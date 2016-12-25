@@ -141,9 +141,12 @@
               </tr>
             </thead>
             <tbody>
+              @php
+                $i=1;
+              @endphp
               @foreach ($kejadian->korban as $korban)
                 <tr>
-                  <td></td>
+                  <td>{{$i++}}</td>
                   <td>{{ $korban->nama }}</td>
                   <td>{{ $korban->jenis_kelamin }}</td>
                   <td>{{ $korban->umur }} tahun</td>
@@ -366,80 +369,84 @@
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
   </div><!-- /.modal -->
+
 @stop
 
-<script src="{{ asset('/js/jquery.js') }}" charset="utf-8"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRijsRVPPetZDnC3tCInbEO-uZ6hLiUeI"></script>
-{{-- Modal Script --}}
-<script type="text/javascript">
-$(document).ready(function() {
-  // Edit Kendaraan
-  $('.edit-kendaraan-btn').click(function() {
-    var id = $(this).data('id');
-    var plat = $(this).data('plat');
-    var tipe_kendaraan = $(this).data('tipe');
-    var merk = $(this).data('merk');
-    var warna = $(this).data('warna');
-    $('#merk-form').val(merk);
-    $('#palt-form').val(plat);
-    $('#warna-form').val(warna);
-    $('#tipe-form').val(tipe_kendaraan);
-    $('#editvehicleform').attr('action', '/administrator/editkendaraan/'+id);
-    $('.modal-edit-kendaraan').modal();
-  });
-
-  //Edit Korban
-  $('.edit-korban-btn').click(function() {
-    var id = $(this).data('id');
-    var jeniskelamin = $(this).data('gender');
-    var nama = $(this).data('nama');
-    var umur = $(this).data('umur');
-    var kondisi = $(this).data('kondisi');
-    var kendaraan = $(this).data('kendaraan');
-
-    $('#nama-form').val(nama);
-    $('#gender-form').val(jeniskelamin);
-    $('#umur-form').val(umur);
-    $('#kondisi-form').val(kondisi);
-    $('#kendaraan-form').val(kendaraan);
-
-    $('#editvictimform').attr('action', '/administrator/editkorban/'+id);
-
-    $('.modal-edit-korban').modal();
-
-  });
-
-  //hapus korban
-  $('.hapus-korban-btn').click(function() {
-    var id = $(this).data('id');
-    $('.modal-hapus-korban').modal();
-    $('.confirm-hapus-korban').attr('href', '/administrator/hapuskorban/'+id);
-
-  });
-
-});
-</script>
-
-<script src="/js/gmaps.js"></script>
-<script>
+@section('js')
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRijsRVPPetZDnC3tCInbEO-uZ6hLiUeI"></script>
+  {{-- Modal Script --}}
+  <script type="text/javascript">
   $(document).ready(function() {
-    var element = ".col-sm-6 .box .box-body #map-thumbnail";
-    $(element).html('<h4><i class="fa fa-exclamation-circle"></i> Error Loading Google Maps</h4>');
-    var map = new GMaps({
-      el: '#map-thumbnail',
-      lat: {{$kejadian->latitude}},
-      lng: {{$kejadian->longitude}},
-      zoom: 18
+    // Edit Kendaraan
+    $('.edit-kendaraan-btn').click(function() {
+      var id = $(this).data('id');
+      var plat = $(this).data('plat');
+      var tipe_kendaraan = $(this).data('tipe');
+      var merk = $(this).data('merk');
+      var warna = $(this).data('warna');
+      $('#merk-form').val(merk);
+      $('#palt-form').val(plat);
+      $('#warna-form').val(warna);
+      $('#tipe-form').val(tipe_kendaraan);
+      $('#editvehicleform').attr('action', '/administrator/editkendaraan/'+id);
+      $('.modal-edit-kendaraan').modal();
     });
 
-    map.addMarker({
-      lat: {{$kejadian->latitude}},
-      lng: {{$kejadian->longitude}},
-      icon : {
-        url : "{{ asset('/img/kecelakaan.png')}}"
-      }
+    //Edit Korban
+    $('.edit-korban-btn').click(function() {
+      var id = $(this).data('id');
+      var jeniskelamin = $(this).data('gender');
+      var nama = $(this).data('nama');
+      var umur = $(this).data('umur');
+      var kondisi = $(this).data('kondisi');
+      var kendaraan = $(this).data('kendaraan');
+
+      $('#nama-form').val(nama);
+      $('#gender-form').val(jeniskelamin);
+      $('#umur-form').val(umur);
+      $('#kondisi-form').val(kondisi);
+      $('#kendaraan-form').val(kendaraan);
+
+      $('#editvictimform').attr('action', '/administrator/editkorban/'+id);
+
+      $('.modal-edit-korban').modal();
+
     });
 
-    
+    //hapus korban
+    $('.hapus-korban-btn').click(function() {
+      var id = $(this).data('id');
+      $('.modal-hapus-korban').modal();
+      $('.confirm-hapus-korban').attr('href', '/administrator/hapuskorban/'+id);
+
+    });
+
   });
-</script>
+  </script>
+
+  <script src="/js/gmaps.js"></script>
+  <script>
+    $(document).ready(function() {
+      var element = ".col-sm-6 .box .box-body #map-thumbnail";
+      $(element).html('<h4><i class="fa fa-exclamation-circle"></i> Error Loading Google Maps</h4>');
+      var map = new GMaps({
+        el: '#map-thumbnail',
+        lat: {{$kejadian->latitude}},
+        lng: {{$kejadian->longitude}},
+        zoom: 18
+      });
+
+      map.addMarker({
+        lat: {{$kejadian->latitude}},
+        lng: {{$kejadian->longitude}},
+        icon : {
+          url : "{{ asset('/img/kecelakaan.png')}}"
+        }
+      });
+
+
+    });
+  </script>
+
+  @include('sweet::alert')
+@endsection

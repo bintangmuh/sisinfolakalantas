@@ -8,7 +8,7 @@ use App\Korban as Korban;
 use App\Kendaraan as Kendaraan;
 use App\Kabupaten as Kabupaten;
 use Illuminate\Support\Facades\Input as Input;
-
+use Alert;
 use DB;
 class AdminController extends Controller
 {
@@ -106,6 +106,7 @@ class AdminController extends Controller
       $kendaraan->pengemudi_id = 0;
       $kendaraan->kejadian_id = $id;
       $kendaraan->save();
+      Alert::success($kendaraan->merk . ' ' . $kendaraan->warna . ' ' . $kendaraan->platnomor, 'Menambah kendaraan telah dilakukan')->autoclose(5000);
 
       return redirect()->route('showDetilLakalantas', ['id' => $kendaraan->kejadian_id]);
 
@@ -121,7 +122,7 @@ class AdminController extends Controller
         $kendaraan->platnomor = Input::get('platnomor');
         $kendaraan->warna = Input::get('warna');
         $kendaraan->save();
-
+        Alert::success('Success Message', 'Edit Kendaraan telah dilakukan')->autoclose(3000);
         return redirect()->route('showDetilLakalantas', ['id' => $kendaraan->kejadian_id]);
     }
 
@@ -136,6 +137,7 @@ class AdminController extends Controller
       $korban->kendaraan_id = Input::get('kendaraan');
       $korban->kejadian_id = $id;
       $korban->save();
+      Alert::success('Nama: '. $korban->nama .'', 'Menambah Korban telah dilakukan')->autoclose(3000);
       return redirect()->route('showDetilLakalantas', ['id' => $id]);
     }
 
@@ -149,6 +151,7 @@ class AdminController extends Controller
       $korban->kendaraan_id = Input::get('kendaraan');
       $korban->save();
 
+      Alert::success('Nama: '. $korban->nama .'', 'Menyunting Korban telah dilakukan')->autoclose(3000);
       return redirect()->route('showDetilLakalantas', ['id' => $korban->kejadian_id]);
     }
 
@@ -156,7 +159,7 @@ class AdminController extends Controller
     {
       $korban = Korban::find($id);
       $korban->delete();
+      Alert::success('Nama: '. $korban->nama .'', 'Menghapus Korban telah dilakukan')->autoclose(3000);
       return redirect()->route('showDetilLakalantas', ['id' => $korban->kejadian_id]);
-
     }
 }
