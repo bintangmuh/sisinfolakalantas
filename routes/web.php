@@ -22,6 +22,10 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function() {
   Route::get('/home', 'UserController@beranda');
 
+  Route::get('/profile', 'UserController@profile')->name('profile');
+
+  Route::post('/profile', 'UserController@editprofile')->name('editprofile');
+
   Route::get('/laporan', 'UserController@listKejadian')->name('laporankejadian');
 
   Route::get('/logout', 'UserController@logout')->name('logout');
@@ -69,4 +73,13 @@ Route::group(['middleware' => ['auth', 'admin'], 'prefix' => 'administrator'], f
   Route::post('editkendaraan/{id}/', 'AdminController@editKendaraan')->name('editkendaraan');
 
   Route::get('peta', 'AdminController@showSebaran')->name('admin.sebaran');
+
+  Route::get('profile', 'AdminController@profile')->name('admin.profile');
+
+  Route::post('profile', 'AdminController@editprofile')->name('admin.post.profile');
+
+  Route::get('adminlist', 'AdminController@adminList')->name('admin.list');
+
+  Route::post('adminlist/{id}/', 'AdminController@addadmin')->name('admin.new');
+
 });

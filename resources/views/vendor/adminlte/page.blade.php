@@ -138,4 +138,5 @@
   <script src="//cdn.datatables.net/1.10.13/js/dataTables.bootstrap.min.js" charset="utf-8"></script>
     @stack('js')
     @yield('js')
+      @include('sweet::alert')
 @stop

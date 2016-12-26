@@ -448,5 +448,5 @@
     });
   </script>
 
-  @include('sweet::alert')
+
 @endsection

@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Kejadian as Kejadian;
+use App\User as User;
 use App\Korban as Korban;
 use App\Kendaraan as Kendaraan;
 use App\Kabupaten as Kabupaten;
 use Illuminate\Support\Facades\Input as Input;
 use Alert;
+use Auth;
 use DB;
 class AdminController extends Controller
 {
@@ -43,8 +45,38 @@ class AdminController extends Controller
                       ->get();
       $laporanbaru = Kejadian::select('*')->orderBy('waktu_kejadian', 'DESC')->limit(5)->get();
       return view('admin.index',['angka' => $angka, 'korban' => $korban, 'kejadian' => $kejadian, 'angkakendaraan' => $angkakendaraan, 'pertumbuhan' => $pertumbuhan, 'laporanbaru' => $laporanbaru]);
+    }
 
+    public function profile() {
+      $user =  User::find(Auth::user()->id);
+      return view('admin.profile', ['user' => $user ]);
+    }
 
+    public function editprofile() {
+      $user =  User::find(Auth::user()->id);
+      $user->name = Input::get('name');
+      $user->email = Input::get('email');
+      $user->address = Input::get('address');
+      $user->save();
+
+      Alert::success('Edit Profile Berhasil', 'Menyunting profil telah dilakukan')->autoclose(3500);
+
+      return redirect()->route('admin.profile');
+    }
+
+    public function adminList() {
+      $admin = User::where('role', 'admin')->get();
+      $user = User::where('role', 'user')->get();
+      return view('admin.administratorlist', ['admin' => $admin, 'users' => $user]);
+    }
+
+    public function addAdmin($id) {
+      $user = User::find($id);
+      $user->role = Input::get('role');
+      $user->save();
+      Alert::success('Menambah Admin dengan nama:'.$user->nama.' Berhasil', 'Menambah admin telah dilakukan')->autoclose(2000);
+
+      return redirect()->route('admin.list');
     }
 
     public function showLakalantas()

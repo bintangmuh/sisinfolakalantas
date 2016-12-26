@@ -132,23 +132,13 @@ return [
         'ADMINISTRATOR',
         [
             'text' => 'Profile',
-            'url'  => 'admin/settings',
+            'route' => 'admin.profile',
             'icon' => 'user',
-        ],
-        [
-            'text' => 'Change Password',
-            'url'  => 'admin/settings',
-            'icon' => 'lock',
         ],
         [
             'text' => 'Administrator',
             'icon' => 'life-saver',
-            'submenu' => [
-              [
-                'text' => 'Kelola Admin',
-                'url'  => '#'
-              ]
-            ]
+            'route' => 'admin.list'
         ],
 
     ],

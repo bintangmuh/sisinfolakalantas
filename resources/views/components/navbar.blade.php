@@ -8,6 +8,7 @@
               <li><a href="/administrator">Administrator</a></li>
             @endif
           @endif
+          <li><a href="{{ route('profile') }}">Profile </a></li>
           <li><a href="{{ route('laporankejadian') }}">Daftar Laporan</a></li>
           <li><a href="{{ route('logout')}}">Keluar</a></li>
         </ul>

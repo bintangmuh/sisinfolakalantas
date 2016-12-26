@@ -21,6 +21,23 @@ class UserController extends Controller
       return view('user.home', array('kejadian' => $kejadian));
     }
 
+    public function profile() {
+      $user = User::find(Auth::user()->id);
+
+      return view('user.profile', ['user' => $user]);
+
+    }
+    public function editprofile() {
+      $user =  User::find(Auth::user()->id);
+      $user->name = Input::get('name');
+      $user->email = Input::get('email');
+      $user->address = Input::get('address');
+      $user->save();
+
+      return redirect()->route('profile');
+    }
+
+
     public function listKejadian(){
       $kejadian = Kejadian::where('sender_id', '=', Auth::user()->id)->orderBy('waktu_kejadian', 'DESC')->paginate(5);
       return view('user.datakejadian', array('kejadian' => $kejadian));
